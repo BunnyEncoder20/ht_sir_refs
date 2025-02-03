@@ -1,13 +1,15 @@
-function do2(callback) {
-  log.trace("Execute function: do2");
+import express from "express";
+import dotenv from "dotenv";
+import { connectDB } from "./db/index.js";
 
-  return callback("do2 callback param");
-}
+// dontenv;
+dotenv.config();
 
-var do2Result = do2((param) => {
-  log.trace(`print ${param}`);
+// init app
+const app = express();
+const port = process.env.PORT || 8000;
+connectDB();
 
-  return `return from callback(${param})`; // we could use that return
+app.listen(port, () => {
+  console.log(`Server is running on port http://localhost:${port}`);
 });
-
-log.trace(`print ${do2Result}`);
